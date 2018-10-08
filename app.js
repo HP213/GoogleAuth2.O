@@ -8,14 +8,16 @@ const keys = require('./config/key');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
-//Set up view engine  experess generator
+//Set up view engine experess generator
 app.set('view engine', 'ejs');
+
 
 //Set Up cookies
 app.use(cookieSession({
   maxAge: 24*60*60*1000,
   keys : [keys.session.cookieKey],
 }));
+
 
 //initialize passport
 app.use(passport.initialize());
@@ -30,10 +32,12 @@ mongoose.connect(keys.mongodb.dbURI, ()=>{
   console.log("MOngodb COnnected");
 });
 
+
 //Create Home Route
 app.get('/', (req, res)=>{
   res.render("home", {user:req.user});
 });
+
 
 app.listen(3000, ()=>{
   console.log("Local Host on 3000");
